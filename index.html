@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday M. Saddid Rifqi Aliy</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(135deg,#000,#1a1a1a,#2b2b2b);
+color:white;
+text-align:center;
+overflow-x:hidden;
+}
+
+h1{
+font-family:'Playfair Display',serif;
+color:#d4af37;
+margin-top:40px;
+font-size:36px;
+}
+
+.section{
+background:rgba(255,255,255,0.05);
+margin:40px auto;
+padding:25px;
+border-radius:20px;
+max-width:600px;
+box-shadow:0 0 25px rgba(212,175,55,0.2);
+}
+
+button{
+background:#d4af37;
+border:none;
+padding:12px 20px;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+}
+
+input,textarea{
+width:90%;
+padding:10px;
+margin:8px 0;
+border-radius:10px;
+border:none;
+}
+
+img{
+width:100%;
+border-radius:15px;
+margin-top:10px;
+}
+
+#confetti{
+position:fixed;
+width:100%;
+height:100%;
+background-image:radial-gradient(#d4af37 1px,transparent 1px);
+background-size:18px 18px;
+opacity:0.15;
+animation:move 4s linear infinite;
+pointer-events:none;
+}
+
+@keyframes move{
+from{background-position:0 0;}
+to{background-position:150px 300px;}
+}
+
+.fireworks{
+font-size:28px;
+margin-top:20px;
+color:#d4af37;
+}
+</style>
+</head>
+
+<body>
+
+<div id="confetti"></div>
+
+<audio autoplay loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<h1>Happy Birthday,<br>M. SADDID RIFQI ALIY 🖤</h1>
+
+<div class="section">
+<h2>Countdown ⏳</h2>
+<p id="countdown"></p>
+</div>
+
+<div class="section">
+<h2>Make a Wish 🕯</h2>
+<button onclick="blow()">Blow Candle</button>
+<p id="wish"></p>
+</div>
+
+<div class="section">
+<h2>Open Your Gift 🎁</h2>
+<button onclick="gift()">Unwrap</button>
+<p id="giftMsg"></p>
+</div>
+
+<div class="section">
+<h2>Our Memories 📸</h2>
+<input type="file" multiple onchange="photos(event)">
+<div id="gallery"></div>
+</div>
+
+<div class="section">
+<h2>Guestbook 💌</h2>
+<input type="text" id="name" placeholder="Your Name">
+<textarea id="msg" placeholder="Your Wish"></textarea>
+<button onclick="guest()">Send</button>
+<div id="list"></div>
+<div id="fw"></div>
+</div>
+
+<script>
+let birthday = new Date().getTime() + (5*60*60*1000);
+
+setInterval(function(){
+let now = new Date().getTime();
+let gap = birthday - now;
+
+let h = Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+let m = Math.floor((gap%(1000*60*60))/(1000*60));
+let s = Math.floor((gap%(1000*60))/1000);
+
+if(gap>0){
+document.getElementById("countdown").innerHTML =
+h+"h "+m+"m "+s+"s";
+}else{
+document.getElementById("countdown").innerHTML =
+"It's Your Time 🎉";
+}
+},1000);
+
+function blow(){
+document.getElementById("wish").innerHTML =
+"Surprise 🤍 I Love You So Much.";
+}
+
+function gift(){
+document.getElementById("giftMsg").innerHTML =
+"You are my greatest blessing 🖤✨";
+}
+
+function photos(event){
+let gallery=document.getElementById("gallery");
+for(let file of event.target.files){
+let img=document.createElement("img");
+img.src=URL.createObjectURL(file);
+gallery.appendChild(img);
+}
+}
+
+let count=0;
+function guest(){
+let name=document.getElementById("name").value;
+let msg=document.getElementById("msg").value;
+if(name && msg){
+let div=document.createElement("div");
+div.innerHTML="<b>"+name+"</b><br>"+msg+"<hr>";
+document.getElementById("list").appendChild(div);
+count++;
+if(count>=10){
+document.getElementById("fw").innerHTML=
+"<div class='fireworks'>🎆 FIREWORKS CELEBRATION 🎆</div>";
+}
+}
+}
+</script>
+
+</body>
+</html>
